@@ -9,6 +9,8 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <stdlib.h>
+
+#define FILE_START_NUM 3
 #define PAGE_SIZE 4096
 #define BUF_SIZE 512
 size_t get_filesize(const char* filename);//get the size of the input file
@@ -26,7 +28,7 @@ int main (int argc, char* argv[])
 	double trans_time; //calulate the time between the device is opened and it is closed
 	i=atoi(argv[1]);
 	strcpy(method,argv[2]);
-	int file_start_num = 3;
+	int file_start_num = FILE_START_NUM;
 	if( (dev_fd = open("/dev/master_device", O_RDWR)) < 0)
 	{
 		perror("failed to open /dev/master_device\n");
