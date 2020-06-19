@@ -29,7 +29,7 @@
 #define master_IOCTL_MMAP 0x12345678
 #define master_IOCTL_EXIT 0x12345679
 #define BUF_SIZE 512
-#define P2_MAP_SIZE PAGE_SIZE * 200
+#define P2_MAP_SIZE PAGE_SIZE * 100
 typedef struct socket * ksocket_t;
 
 struct dentry  *file1;//debug file

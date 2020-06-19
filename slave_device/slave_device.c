@@ -31,7 +31,7 @@
 
 
 #define BUF_SIZE 512
-#define P2_MAP_SIZE PAGE_SIZE * 200
+#define P2_MAP_SIZE PAGE_SIZE * 100
 
 
 
