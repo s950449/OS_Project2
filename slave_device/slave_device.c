@@ -31,7 +31,7 @@
 
 
 #define BUF_SIZE 512
-
+#define P2_MAP_SIZE PAGE_SIZE * 200
 
 
 
@@ -60,12 +60,35 @@ static ksocket_t sockfd_cli;//socket to the master server
 static struct sockaddr_in addr_srv; //address of the master server
 
 //file operations
+void project2_open(struct vm_area_struct *vma){
+	printk(KERN_INFO "[DEBUG] Project2 open\n");
+	return;
+}
+void project2_close(struct vm_area_struct *vma){
+	printk(KERN_INFO "[DEBUG] Project2 close\n");
+	return;
+}
+static const struct vm_operations_struct project2_vm_ops = {
+	.open = project2_open,
+	.close = project2_close
+};
+static int project2_mmap(struct file *file,struct vm_area_struct *vma){
+	unsigned long my_page,my_vma_size;
+	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
+	my_vma_size = vma->vm_end-vma->vm_start;
+	remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
+	vma->vm_ops = &project2_vm_ops;
+	vma->vm_private_data = file->private_data;
+	project2_open(vma);
+	return 0;
+}
 static struct file_operations slave_fops = {
 	.owner = THIS_MODULE,
 	.unlocked_ioctl = slave_ioctl,
 	.open = slave_open,
 	.read = receive_msg,
-	.release = slave_close
+	.release = slave_close,
+	.mmap = project2_mmap
 };
 
 //device info
@@ -101,11 +124,14 @@ static void __exit slave_exit(void)
 
 int slave_close(struct inode *inode, struct file *filp)
 {
+	kfree(flip->private_data);
+	printk(KERN_INFO "Free slave data\n");
 	return 0;
 }
 
 int slave_open(struct inode *inode, struct file *filp)
 {
+	flip->private_data = kmalloc(P2_MAP_SIZE,GFP_KERNEL);
 	return 0;
 }
 static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long ioctl_param)
@@ -163,7 +189,15 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 			ret = 0;
 			break;
 		case slave_IOCTL_MMAP:
-
+			while(1){
+				data_size = krecv(sockfd_cli,buf,sizeof(buf),0);
+				if(data_size == 0){
+					break;
+				}
+				memcpy(file->private_data+len,buf,data_size);
+				len += data_size;
+			}
+			ret = len;
 			break;
 
 		case slave_IOCTL_EXIT:
