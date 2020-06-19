@@ -29,7 +29,7 @@
 #define master_IOCTL_MMAP 0x12345678
 #define master_IOCTL_EXIT 0x12345679
 #define BUF_SIZE 512
-
+#define P2_MAP_SIZE PAGE_SIZE * 200
 typedef struct socket * ksocket_t;
 
 struct dentry  *file1;//debug file
@@ -57,16 +57,31 @@ static struct sockaddr_in addr_cli;//address for slave
 static mm_segment_t old_fs;
 static int addr_len;
 //static  struct mmap_info *mmap_msg; // pointer to the mapped data in this device
+void project2_open(){
+	printk("[DEBUG] Project2 open\n");
+	return;
+}
+void project2_close(){
+	printk("[DEBUG] Project2 close\n");
+	return;
+}
+static const struct vm_operations_struct project2_vm_ops = {
+	.open = project2_open(),
+	.close = project2_close()
+};
+static int project2(struct vm_area_struct *vma,struct file *file){
 
+
+}
 //file operations
 static struct file_operations master_fops = {
 	.owner = THIS_MODULE,
 	.unlocked_ioctl = master_ioctl,
 	.open = master_open,
 	.write = send_msg,
-	.release = master_close
+	.release = master_close,
+	.mmap = project2
 };
-
 //device info
 static struct miscdevice master_dev = {
 	.minor = MISC_DYNAMIC_MINOR,
@@ -175,6 +190,7 @@ static long master_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
 			ret = 0;
 			break;
 		case master_IOCTL_MMAP:
+			/* Implement Needed */
 			break;
 		case master_IOCTL_EXIT:
 			if(kclose(sockfd_cli) == -1)
