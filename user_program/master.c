@@ -68,7 +68,7 @@ int main (int argc, char* argv[])
 				}while(ret > 0);
 				break;
 		}
-
+		ioctl(dev_fd,0x00000000);
 		if(ioctl(dev_fd, 0x12345679) == -1) // end sending data, close the connection
 		{
 			perror("ioclt server exits error\n");

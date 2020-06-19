@@ -66,7 +66,7 @@ int main (int argc, char* argv[])
 		}
 
 
-
+		ioctl(dev_fd,0x00000000);		
 		if(ioctl(dev_fd, 0x12345679) == -1)// end receiving data, close the connection
 		{
 			perror("ioclt client exits error\n");
