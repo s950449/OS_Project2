@@ -66,6 +66,8 @@ void project2_close(struct vm_area_struct *vma){
 	return;
 }
 static int project2_fault(struct vm_fault *vmf){
+	vmf->page = virt_to_page(vmf->vma->vm_private_data);
+	get_page(vmf->page);
 	return 0;
 }
 static const struct vm_operations_struct project2_vm_ops = {
