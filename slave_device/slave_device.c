@@ -124,14 +124,14 @@ static void __exit slave_exit(void)
 
 int slave_close(struct inode *inode, struct file *filp)
 {
-	kfree(flip->private_data);
+	kfree(filp->private_data);
 	printk(KERN_INFO "Free slave data\n");
 	return 0;
 }
 
 int slave_open(struct inode *inode, struct file *filp)
 {
-	flip->private_data = kmalloc(P2_MAP_SIZE,GFP_KERNEL);
+	filp->private_data = kmalloc(P2_MAP_SIZE,GFP_KERNEL);
 	return 0;
 }
 static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long ioctl_param)

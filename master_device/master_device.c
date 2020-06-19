@@ -158,14 +158,14 @@ static void __exit master_exit(void)
 
 int master_close(struct inode *inode, struct file *filp)
 {
-	kfree(flip->private_data);
+	kfree(filp->private_data);
 	printk(KERN_INFO "Free master data\n");
 	return 0;
 }
 
 int master_open(struct inode *inode, struct file *filp)
 {
-	flip->private_data = kmalloc(P2_MAP_SIZE,GFP_KERNEL);
+	filp->private_data = kmalloc(P2_MAP_SIZE,GFP_KERNEL);
 	return 0;
 }
 
