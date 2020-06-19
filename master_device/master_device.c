@@ -57,11 +57,11 @@ static struct sockaddr_in addr_cli;//address for slave
 static mm_segment_t old_fs;
 static int addr_len;
 //static  struct mmap_info *mmap_msg; // pointer to the mapped data in this device
-void project2_open(){
+void project2_open(struct vm_area_struct *vma){
 	printk("[DEBUG] Project2 open\n");
 	return;
 }
-void project2_close(){
+void project2_close(struct vm_area_struct *vma){
 	printk("[DEBUG] Project2 close\n");
 	return;
 }
@@ -69,9 +69,15 @@ static const struct vm_operations_struct project2_vm_ops = {
 	.open = project2_open(),
 	.close = project2_close()
 };
-static int project2(struct vm_area_struct *vma,struct file *file){
-
-
+static int project2_mmap(struct vm_area_struct *vma,struct file *file){
+	unsigned long my_page,my_vma_size;
+	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
+	my_vma_size = ,vma->vm_end-vma->vm_start;
+	remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
+	vma->vm_ops = &project2_vm_ops;
+	vma->vm_private_data = file->private_data;
+	project2_open(vma);
+	return 0;
 }
 //file operations
 static struct file_operations master_fops = {
@@ -80,7 +86,7 @@ static struct file_operations master_fops = {
 	.open = master_open,
 	.write = send_msg,
 	.release = master_close,
-	.mmap = project2
+	.mmap = project2_mmap
 };
 //device info
 static struct miscdevice master_dev = {
@@ -190,7 +196,8 @@ static long master_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
 			ret = 0;
 			break;
 		case master_IOCTL_MMAP:
-			/* Implement Needed */
+			/* Implement Needed(Testing now) */
+			ksend(sockfd_cli,file->private_data,ioctl_param,0);
 			break;
 		case master_IOCTL_EXIT:
 			if(kclose(sockfd_cli) == -1)
