@@ -68,9 +68,15 @@ void project2_close(struct vm_area_struct *vma){
 	printk(KERN_INFO "[DEBUG] Project2 close\n");
 	return;
 }
+static int project2_fault(struct vm_area_struct *vma,struct vm_fault *vmf){
+	vmf->page = virt_to_page(vma->vm_private_data);
+	get_page(vmf->page);
+	return 0;
+}
 static const struct vm_operations_struct project2_vm_ops = {
 	.open = project2_open,
-	.close = project2_close
+	.close = project2_close,
+	.fault = project2_fault
 };
 static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	unsigned long my_page,my_vma_size;
