@@ -66,13 +66,13 @@ void project2_close(struct vm_area_struct *vma){
 	return;
 }
 static const struct vm_operations_struct project2_vm_ops = {
-	.open = project2_open(),
-	.close = project2_close()
+	.open = project2_open,
+	.close = project2_close
 };
-static int project2_mmap(struct vm_area_struct *vma,struct file *file){
+static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	unsigned long my_page,my_vma_size;
 	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
-	my_vma_size = ,vma->vm_end-vma->vm_start;
+	my_vma_size = vma->vm_end-vma->vm_start;
 	remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
 	vma->vm_ops = &project2_vm_ops;
 	vma->vm_private_data = file->private_data;
