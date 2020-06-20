@@ -205,7 +205,7 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 				if(data_size == 0){
 					break;
 				}
-				printk(KERN_INFO,"Start memcpy\n");
+				printk(KERN_INFO "Start memcpy\n");
 				memcpy(file->private_data+len,buf,data_size);
 				len += data_size;
 			}
