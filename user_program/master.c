@@ -91,6 +91,7 @@ int main (int argc, char* argv[])
 			perror("ioclt server exits error\n");
 			return 1;
 		}
+		printf("File %d, size= %d bytes\n",j,data_size);
 		file_size += data_size;
 		close(file_fd);
 	}
