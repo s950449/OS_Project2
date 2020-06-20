@@ -87,7 +87,7 @@ static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	vma->vm_flags |=VM_RESERVED;
 	vma->vm_flags |=VM_IO;
 	vma->vm_private_data = file->private_data;
-	printk(KERN_INFP "[INFO]Prepare to open...\n");
+	printk(KERN_INFO "[INFO]Prepare to open...\n");
 	project2_open(vma);
 	return 0;
 }
