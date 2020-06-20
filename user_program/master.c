@@ -13,6 +13,7 @@
 #define FILE_START_NUM 3
 #define PAGE_SIZE 4096
 #define BUF_SIZE 512
+#define P2_MAP_SIZE PAGE_SIZE * 100
 size_t get_filesize(const char* filename);//get the size of the input file
 
 
@@ -35,6 +36,9 @@ int main (int argc, char* argv[])
 		return 1;
 	}
 	for(int j = 0;j < i; j++){
+		offset = 0;
+		file_size = 0;
+		ret = 0;
 		memset(file_name,0,sizeof(file_name));
 		strcpy(file_name,argv[file_start_num + j]);
 		gettimeofday(&start ,NULL);
@@ -67,8 +71,21 @@ int main (int argc, char* argv[])
 					write(dev_fd, buf, ret);//write to the the device
 				}while(ret > 0);
 				break;
+			case 'm'://mmap
+				while(offset<file_size){
+					size_t len = P2_MAP_SIZE;
+					if((file_size - offset )<len){
+						len = file_size - offset;
+					}
+					file_address = mmap(NULL,len,PROT_READ,MAP_SHARED,file_fd,offset);
+					kernel_address = mmap(NULL,len,PROT_WRITE,MAP_SHARED,dev_fd,offset);
+					memcpy(file_address,kernel_address,len);
+					offset += len;
+					ioctl(dev_fd,0x12345678,len);
+				}
+				break;
 		}
-		ioctl(dev_fd,0x00000000);
+		ioctl(dev_fd,0x1234);
 		if(ioctl(dev_fd, 0x12345679) == -1) // end sending data, close the connection
 		{
 			perror("ioclt server exits error\n");

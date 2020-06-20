@@ -36,6 +36,9 @@ int main (int argc, char* argv[])
 		return 1;
 	}
 	for(int j=0; j<i; j++){
+		ret = 0;
+		file_size = 0;
+		data_size = 0;
 		memset(file_name,0,sizeof(file_name));
 		strcpy(file_name,argv[file_start_num + j]);		
 		gettimeofday(&start ,NULL);
@@ -63,10 +66,24 @@ int main (int argc, char* argv[])
 					file_size += ret;
 				}while(ret > 0);
 				break;
+			case 'm'://mmap
+				while(1){
+					ret = ioctl(dev_fd,0x12345678);
+					if(ret == 0){
+						file_size = data_size;
+						break;
+					}
+					fallocate(file_fd,data_size,ret);
+					file_address = mmap(NULL,ret,PROT_WRITE,MAP_SHARED,file_fd,data_size);
+					kernel_address = mmap(NULL,ret,PROT_READ,MAP_SHARED,dev_fd,data_size);
+					memcpy(file_address,kernel_address,ret);
+					data_size += ret;
+				}
+				break;
 		}
 
 
-		ioctl(dev_fd,0x00000000);		
+		ioctl(dev_fd,0x1234);		
 		if(ioctl(dev_fd, 0x12345679) == -1)// end receiving data, close the connection
 		{
 			perror("ioclt client exits error\n");
