@@ -29,13 +29,14 @@ int main (int argc, char* argv[])
 	strcpy(ip,argv[3]);
 	int file_start_num = FILE_START_NUM;
 
-	if( (dev_fd = open("/dev/slave_device", O_RDWR)) < 0)//should be O_RDWR for PROT_WRITE when mmap()
-	{
-		perror("failed to open /dev/slave_device\n");
-		return 1;
-	}
+
 	gettimeofday(&start ,NULL);
 	for(int j=0; j<i; j++){
+		if( (dev_fd = open("/dev/slave_device", O_RDWR)) < 0)//should be O_RDWR for PROT_WRITE when mmap()
+		{
+			perror("failed to open /dev/slave_device\n");
+			return 1;
+		}
 		ret = 0;
 		data_size = 0;
 		memset(file_name,0,sizeof(file_name));
@@ -95,14 +96,13 @@ int main (int argc, char* argv[])
 		}
 		printf("File %d, size= %d bytes\n",j,data_size);
 
-		fsync(file_fd);
 		close(file_fd);
-		fsync(dev_fd);
+		close(dev_fd);
 	}
 	gettimeofday(&end, NULL);
 	trans_time = (end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)*0.0001;
 	printf("Transmission time: %lf ms, File size: %d bytes\n", trans_time, file_size / 8);
-	close(dev_fd);
+
 	return 0;
 }
 
