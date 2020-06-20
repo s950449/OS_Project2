@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -73,7 +74,7 @@ int main (int argc, char* argv[])
 						file_size = data_size;
 						break;
 					}
-					fallocate(file_fd,data_size,ret);
+					fallocate(file_fd,0,data_size,ret);
 					file_address = mmap(NULL,ret,PROT_WRITE,MAP_SHARED,file_fd,data_size);
 					kernel_address = mmap(NULL,ret,PROT_READ,MAP_SHARED,dev_fd,data_size);
 					memcpy(file_address,kernel_address,ret);
