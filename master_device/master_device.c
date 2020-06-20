@@ -78,13 +78,16 @@ static const struct vm_operations_struct project2_vm_ops = {
 static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	unsigned long my_vma_size;
 	phys_addr_t my_page;
+	printk(KERN_INFO "[INFO]Hello from master_device\n");
 	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
 	my_vma_size = vma->vm_end-vma->vm_start;
+	printk(KERN_INFO "[INFO]Start remap_pfn_range\n");
 	io_remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
 	vma->vm_ops = &project2_vm_ops;
 	vma->vm_flags |=VM_RESERVED;
 	vma->vm_flags |=VM_IO;
 	vma->vm_private_data = file->private_data;
+	printk(KERN_INFP "[INFO]Prepare to open...\n");
 	project2_open(vma);
 	return 0;
 }
