@@ -120,8 +120,8 @@ static int __init master_init(void)
 
 	printk(KERN_INFO "master has been registered!\n");
 
-	//old_fs = get_fs();
-	//set_fs(KERNEL_DS);
+	old_fs = get_fs();
+	set_fs(KERNEL_DS);
 
 	//initialize the master server
 	sockfd_srv = sockfd_cli = NULL;
@@ -150,7 +150,7 @@ static int __init master_init(void)
 		return -1;
 	}
     printk("master_device init OK\n");
-//	set_fs(old_fs);
+	set_fs(old_fs);
 	return 0;
 }
 
@@ -163,7 +163,7 @@ static void __exit master_exit(void)
 		printk("kclose srv error\n");
 		return ;
 	}
-//	set_fs(old_fs);
+	set_fs(old_fs);
 	printk(KERN_INFO "master exited!\n");
 	debugfs_remove(file1);
 }
@@ -192,8 +192,8 @@ static long master_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
 	pud_t *pud;
 	pmd_t *pmd;
     pte_t *ptep, pte;
-//	old_fs = get_fs();
-//	set_fs(KERNEL_DS);
+	old_fs = get_fs();
+	set_fs(KERNEL_DS);
 	switch(ioctl_num){
 		case master_IOCTL_CREATESOCK:// create socket and accept a connection
 			sockfd_cli = kaccept(sockfd_srv, (struct sockaddr *)&addr_cli, &addr_len);
@@ -234,7 +234,7 @@ static long master_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
 			break;
 	}
 
-	//set_fs(old_fs);
+	set_fs(old_fs);
 	return ret;
 }
 static ssize_t send_msg(struct file *file, const char __user *buf, size_t count, loff_t *data)
