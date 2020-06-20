@@ -68,6 +68,7 @@ void project2_close(struct vm_area_struct *vma){
 static int project2_fault(struct vm_fault *vmf){
 	vmf->page = virt_to_page(vmf->vma->vm_private_data);
 	get_page(vmf->page);
+	printk(KERN_ERR "Deal with page fault\n");
 	return 0;
 }
 static const struct vm_operations_struct project2_vm_ops = {
@@ -82,7 +83,9 @@ static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
 	my_vma_size = vma->vm_end-vma->vm_start;
 	printk(KERN_INFO "[INFO]Start remap_pfn_range\n");
-	io_remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
+	if(remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot)){
+		return -EAGAIN;
+	}
 	vma->vm_ops = &project2_vm_ops;
 	vma->vm_flags |=VM_RESERVED;
 	vma->vm_flags |=VM_IO;
