@@ -30,14 +30,14 @@ int main (int argc, char* argv[])
 	i=atoi(argv[1]);
 	strcpy(method,argv[2]);
 	int file_start_num = FILE_START_NUM;
-
+	if( (dev_fd = open("/dev/master_device", O_RDWR)) < 0)
+	{
+		perror("failed to open /dev/master_device\n");
+		return 1;
+	}
 	gettimeofday(&start ,NULL);
 	for(int j = 0;j < i; j++){
-		if( (dev_fd = open("/dev/master_device", O_RDWR)) < 0)
-		{
-			perror("failed to open /dev/master_device\n");
-			return 1;
-		}
+
 		data_size = 0;
 		offset = 0;
 		ret = 0;
@@ -99,8 +99,8 @@ int main (int argc, char* argv[])
 		printf("File %d, size= %d bytes\n",j,data_size);
 		file_size += data_size;
 		close(file_fd);
-		close(dev_fd);
 	}
+	close(dev_fd);
 	gettimeofday(&end, NULL);
 	trans_time = (end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)*0.0001;
 	printf("Transmission time: %lf ms, File size: %d bytes\n", trans_time, file_size / 8);

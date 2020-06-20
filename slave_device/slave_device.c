@@ -200,7 +200,7 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 			break;
 		case slave_IOCTL_MMAP:
 			while(1){
-				data_size = krecv(sockfd_cli,buf,sizeof(buf),0);
+				data_size = krecv(sockfd_cli,buf,sizeof(buf),MSG_WAITALL);
 				if(data_size == 0){
 					break;
 				}
