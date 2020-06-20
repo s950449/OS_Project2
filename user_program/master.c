@@ -85,7 +85,7 @@ int main (int argc, char* argv[])
 					printf("Debug3\n");
 					printf("%s\n",file_address);
 					printf("%s\n",kernel_address);
-					memcpy(file_address,kernel_address,len);
+					memcpy(kernel_address,file_address,len);
 					offset += len;
 					ioctl(dev_fd,0x12345678,len);
 				}
