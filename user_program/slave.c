@@ -11,7 +11,6 @@
 #include <stdlib.h>
 
 #define FILE_START_NUM 4
-#define PAGE_SIZE 4096
 #define BUF_SIZE 512
 int main (int argc, char* argv[])
 {
