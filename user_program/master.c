@@ -76,14 +76,8 @@ int main (int argc, char* argv[])
 					if((file_size - offset )<len){
 						len = file_size - offset;
 					}
-					printf("Debug\n");
-					printf("len %d\n",len);
 					file_address = mmap(NULL,len,PROT_READ,MAP_SHARED,file_fd,offset);
-					printf("Debug2\n");
 					kernel_address = mmap(NULL,len,PROT_WRITE,MAP_SHARED,dev_fd,offset);
-					printf("Debug3\n");
-					printf("%s\n",file_address);
-					printf("%s\n",kernel_address);
 					memcpy(kernel_address,file_address,len);
 					offset += len;
 					ioctl(dev_fd,0x12345678,len);
