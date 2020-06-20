@@ -29,7 +29,7 @@
 #define slave_IOCTL_MMAP 0x12345678
 #define slave_IOCTL_EXIT 0x12345679
 
-
+#define PAGE_SIZE 4096
 #define BUF_SIZE 512
 #define P2_MAP_SIZE PAGE_SIZE * 100
 

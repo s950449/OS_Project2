@@ -24,6 +24,7 @@
 #define VM_RESERVED   (VM_DONTEXPAND | VM_DONTDUMP)
 #endif
 
+#define PAGE_SIZE 4096
 #define DEFAULT_PORT 2325
 #define master_IOCTL_CREATESOCK 0x12345677
 #define master_IOCTL_MMAP 0x12345678
