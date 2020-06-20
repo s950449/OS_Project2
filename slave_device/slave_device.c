@@ -150,7 +150,8 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 
 	int addr_len ;
 	unsigned int i;
-	size_t len, data_size = 0;
+	size_t len = 0;
+	size_t data_size = 0;
 	char *tmp, ip[20], buf[BUF_SIZE];
 	struct page *p_print;
 	unsigned char *px;
