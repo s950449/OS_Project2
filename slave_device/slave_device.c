@@ -29,7 +29,6 @@
 #define slave_IOCTL_MMAP 0x12345678
 #define slave_IOCTL_EXIT 0x12345679
 
-#define PAGE_SIZE 4096
 #define BUF_SIZE 512
 #define P2_MAP_SIZE PAGE_SIZE * 100
 
@@ -158,8 +157,8 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 	pud_t *pud;
 	pmd_t *pmd;
     pte_t *ptep, pte;
-	old_fs = get_fs();
-	set_fs(KERNEL_DS);
+	//old_fs = get_fs();
+	//set_fs(KERNEL_DS);
 
     printk("slave device ioctl");
 
@@ -227,7 +226,7 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 			ret = 0;
 			break;
 	}
-    set_fs(old_fs);
+  //  set_fs(old_fs);
 
 	return ret;
 }
