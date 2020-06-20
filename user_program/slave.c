@@ -76,8 +76,10 @@ int main (int argc, char* argv[])
 					file_address = mmap(NULL,ret,PROT_WRITE,MAP_SHARED,file_fd,data_size);
 					kernel_address = mmap(NULL,ret,PROT_READ,MAP_SHARED,dev_fd,data_size);
 					memcpy(file_address,kernel_address,ret);
-					munmap(file_address,ret);
-					munmap(kernel_address,ret);
+					if(file_address != NULL)
+						munmap(file_address,ret);
+					if(kernel_address != NULL)
+						munmap(kernel_address,ret);
 					data_size += ret;
 
 				}
