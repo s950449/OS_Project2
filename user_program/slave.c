@@ -36,7 +36,6 @@ int main (int argc, char* argv[])
 	}
 	for(int j=0; j<i; j++){
 		ret = 0;
-		file_size = 0;
 		data_size = 0;
 		memset(file_name,0,sizeof(file_name));
 		strcpy(file_name,argv[file_start_num + j]);		

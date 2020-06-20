@@ -69,6 +69,7 @@ void project2_close(struct vm_area_struct *vma){
 }
 static int project2_fault(struct vm_fault *vmf){
 	vmf->page = virt_to_page(vmf->vma->vm_private_data);
+	printk(KERN_ERR "[DEBUG] Slave Page Fault\n");
 	get_page(vmf->page);
 	return 0;
 }
@@ -82,11 +83,12 @@ static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	phys_addr_t my_page;
 	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
 	my_vma_size = vma->vm_end-vma->vm_start;
-	io_remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
+	remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
 	vma->vm_ops = &project2_vm_ops;
 	vma->vm_flags |=VM_RESERVED;
 	vma->vm_flags |=VM_IO;
 	vma->vm_private_data = file->private_data;
+	printk(KERN_INFO "Prepare to exec mmap_open\n");
 	project2_open(vma);
 	return 0;
 }
