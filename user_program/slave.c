@@ -69,6 +69,7 @@ int main (int argc, char* argv[])
 			case 'm'://mmap
 				while(1){
 					ret = ioctl(dev_fd,0x12345678);
+					printf("ret %d\n",ret);
 					if(ret == 0){
 						file_size = data_size;
 						break;
