@@ -97,7 +97,9 @@ int main (int argc, char* argv[])
 		}
 		printf("File %d, size= %d bytes\n",j,data_size);
 		file_size += data_size;
+		fsync(file_fd);
 		close(file_fd);
+		fsync(dev_fd);
 	}
 	gettimeofday(&end, NULL);
 	trans_time = (end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)*0.0001;
