@@ -83,6 +83,7 @@ static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	io_remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
 	vma->vm_ops = &project2_vm_ops;
 	vma->vm_flags |=VM_RESERVED;
+	vma->vm_flags |=VM_IO;
 	vma->vm_private_data = file->private_data;
 	project2_open(vma);
 	return 0;
