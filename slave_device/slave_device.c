@@ -160,8 +160,8 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 	pud_t *pud;
 	pmd_t *pmd;
     pte_t *ptep, pte;
-	//old_fs = get_fs();
-	//set_fs(KERNEL_DS);
+	old_fs = get_fs();
+	set_fs(KERNEL_DS);
 
     printk("slave device ioctl");
 
@@ -230,7 +230,7 @@ static long slave_ioctl(struct file *file, unsigned int ioctl_num, unsigned long
 			ret = 0;
 			break;
 	}
-  //  set_fs(old_fs);
+    set_fs(old_fs);
 
 	return ret;
 }
