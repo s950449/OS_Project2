@@ -1,0 +1,11 @@
+Transmission time: 4017.512800 ms, File size: 4 bytes
+Transmission time: 0.084900 ms, File size: 107 bytes
+Transmission time: 0.123900 ms, File size: 167 bytes
+Transmission time: 0.120500 ms, File size: 207 bytes
+Transmission time: 0.108300 ms, File size: 255 bytes
+Transmission time: 0.260300 ms, File size: 383 bytes
+Transmission time: 0.073000 ms, File size: 351 bytes
+Transmission time: 0.152300 ms, File size: 507 bytes
+Transmission time: 0.235200 ms, File size: 457 bytes
+Transmission time: 0.092000 ms, File size: 577 bytes
+Transmission time: 4.290900 ms, File size: 1502860 bytes
