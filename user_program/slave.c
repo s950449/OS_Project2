@@ -61,6 +61,7 @@ int main (int argc, char* argv[])
 				{
 					ret = read(dev_fd, buf, sizeof(buf)); // read from the the device
 					write(file_fd, buf, ret); //write to the input file
+					data_size += ret;
 					file_size += ret;
 				}while(ret > 0);
 				break;
