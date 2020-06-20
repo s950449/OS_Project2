@@ -34,12 +34,12 @@ int main (int argc, char* argv[])
 		perror("failed to open /dev/slave_device\n");
 		return 1;
 	}
+	gettimeofday(&start ,NULL);
 	for(int j=0; j<i; j++){
 		ret = 0;
 		data_size = 0;
 		memset(file_name,0,sizeof(file_name));
 		strcpy(file_name,argv[file_start_num + j]);		
-		gettimeofday(&start ,NULL);
 		if( (file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC)) < 0)
 		{
 			perror("failed to open input file\n");
@@ -68,7 +68,7 @@ int main (int argc, char* argv[])
 				while(1){
 					ret = ioctl(dev_fd,0x12345678);
 					if(ret == 0){
-						file_size = data_size;
+						file_size += data_size;
 						break;
 					}
 					posix_fallocate(file_fd,data_size,ret);
@@ -87,13 +87,14 @@ int main (int argc, char* argv[])
 			perror("ioclt client exits error\n");
 			return 1;
 		}
-		gettimeofday(&end, NULL);
-		trans_time = (end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)*0.0001;
-		printf("Transmission time: %lf ms, File size: %d bytes\n", trans_time, file_size / 8);
+
 
 
 		close(file_fd);
 	}
+	gettimeofday(&end, NULL);
+	trans_time = (end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)*0.0001;
+	printf("Transmission time: %lf ms, File size: %d bytes\n", trans_time, file_size / 8);
 	close(dev_fd);
 	return 0;
 }
