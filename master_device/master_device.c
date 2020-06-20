@@ -58,11 +58,11 @@ static mm_segment_t old_fs;
 static int addr_len;
 //static  struct mmap_info *mmap_msg; // pointer to the mapped data in this device
 void project2_open(struct vm_area_struct *vma){
-	printk(KERN_INFO "[DEBUG] Project2 open\n");
+//	printk(KERN_INFO "[DEBUG] Project2 open\n");
 	return;
 }
 void project2_close(struct vm_area_struct *vma){
-	printk(KERN_INFO "[DEBUG] Project2 close\n");
+//	printk(KERN_INFO "[DEBUG] Project2 close\n");
 	return;
 }
 static int project2_fault(struct vm_fault *vmf){

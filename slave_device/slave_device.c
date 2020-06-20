@@ -60,11 +60,11 @@ static struct sockaddr_in addr_srv; //address of the master server
 
 //file operations
 void project2_open(struct vm_area_struct *vma){
-	printk(KERN_INFO "[DEBUG] Project2 open\n");
+//	printk(KERN_INFO "[DEBUG] Project2 open\n");
 	return;
 }
 void project2_close(struct vm_area_struct *vma){
-	printk(KERN_INFO "[DEBUG] Project2 close\n");
+//	printk(KERN_INFO "[DEBUG] Project2 close\n");
 	return;
 }
 static int project2_fault(struct vm_fault *vmf){
