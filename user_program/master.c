@@ -12,6 +12,7 @@
 
 #define FILE_START_NUM 3
 #define BUF_SIZE 512
+#define PAGE_SIZE 4096
 #define P2_MAP_SIZE PAGE_SIZE * 100
 size_t get_filesize(const char* filename);//get the size of the input file
 
