@@ -80,6 +80,8 @@ int main (int argc, char* argv[])
 					file_address = mmap(NULL,len,PROT_READ,MAP_SHARED,file_fd,offset);
 					kernel_address = mmap(NULL,len,PROT_WRITE,MAP_SHARED,dev_fd,offset);
 					memcpy(kernel_address,file_address,len);
+					munmap(file_address,len);
+					munmap(kernel_address,len);
 					offset += len;
 					ioctl(dev_fd,0x12345678,len);
 				}
