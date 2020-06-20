@@ -77,7 +77,7 @@ static const struct vm_operations_struct project2_vm_ops = {
 };
 static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 	unsigned long my_vma_size;
-	int my_page;
+	phys_addr_t my_page;
 	my_page = virt_to_phys(file->private_data) >> PAGE_SHIFT;
 	my_vma_size = vma->vm_end-vma->vm_start;
 	remap_pfn_range(vma,vma->vm_start,my_page,my_vma_size,vma->vm_page_prot);
