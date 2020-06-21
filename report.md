@@ -165,7 +165,133 @@ Note:for *.img files,use `git lfs` instead.(More info :https://git-lfs.github.co
 89a3d69233efd946c57b7a62cc300d50254cf1d7e5cb380960a328a197f462fec9e4c4ef7284ed74ea61333606ae09ec26c5322a4d1fc05f06cabcae41541d54  output/R10M.img
 89a3d69233efd946c57b7a62cc300d50254cf1d7e5cb380960a328a197f462fec9e4c4ef7284ed74ea61333606ae09ec26c5322a4d1fc05f06cabcae41541d54  input/R10M.img
 ```
+Use `./zero_(slave/master).sh $method and ./random_(slave/master).sh $method` to test.
+#### File I/O
+##### Master
+`$cat output/zero_fcntl_master_result.txt`
+```
+Transmission time: 6993.987400 ms, File size: 14549760 bytes
+Transmission time: 1073.988100 ms, File size: 14549760 bytes
+Transmission time: 2912.243900 ms, File size: 14549760 bytes
+Transmission time: 1976.975900 ms, File size: 14549760 bytes
+Transmission time: 1074.965800 ms, File size: 14549760 bytes
+Transmission time: 2012.050300 ms, File size: 14549760 bytes
+Transmission time: 1079.192600 ms, File size: 14549760 bytes
+Transmission time: 1987.399100 ms, File size: 14549760 bytes
+Transmission time: 1994.656800 ms, File size: 14549760 bytes
+Transmission time: 1981.934100 ms, File size: 14549760 bytes
+```
+Note:忽略第一個output(手動控制所造成的延遲)
+Average Time: 1788.156288889 ms
+`$cat output/random_fcntl_master_result.txt`
+```
+Transmission time: 1957.694600 ms, File size: 14549760 bytes
+Transmission time: 2010.371100 ms, File size: 14549760 bytes
+Transmission time: 2031.600700 ms, File size: 14549760 bytes
+Transmission time: 1984.331500 ms, File size: 14549760 bytes
+Transmission time: 1086.119700 ms, File size: 14549760 bytes
+Transmission time: 2008.644700 ms, File size: 14549760 bytes
+Transmission time: 1978.362400 ms, File size: 14549760 bytes
+Transmission time: 2924.766200 ms, File size: 14549760 bytes
+Transmission time: 2012.708300 ms, File size: 14549760 bytes
+Transmission time: 2960.611000 ms, File size: 14549760 bytes
+```
+Average Time: 2095.52102 ms
+##### Slave
+`$cat output/zero_fcntl_slave_result.txt`
+```
+Transmission time: 66.640300 ms, File size: 14549760 bytes
+Transmission time: 72.154200 ms, File size: 14549760 bytes
+Transmission time: 970.938200 ms, File size: 14549760 bytes
+Transmission time: 65.921200 ms, File size: 14549760 bytes
+Transmission time: 65.828800 ms, File size: 14549760 bytes
+Transmission time: 974.680900 ms, File size: 14549760 bytes
+Transmission time: 66.441900 ms, File size: 14549760 bytes
+Transmission time: 970.419200 ms, File size: 14549760 bytes
+Transmission time: 974.920800 ms, File size: 14549760 bytes
+Transmission time: 967.156000 ms, File size: 14549760 bytes
+```
+Average Time: 519.51015 ms
+`$cat output/random_fcntl_slave_result.txt`
+```
+Transmission time: 970.686900 ms, File size: 14549760 bytes
+Transmission time: 972.074100 ms, File size: 14549760 bytes
+Transmission time: 969.775500 ms, File size: 14549760 bytes
+Transmission time: 966.934100 ms, File size: 14549760 bytes
+Transmission time: 970.128600 ms, File size: 14549760 bytes
+Transmission time: 967.237200 ms, File size: 14549760 bytes
+Transmission time: 970.282600 ms, File size: 14549760 bytes
+Transmission time: 971.151200 ms, File size: 14549760 bytes
+Transmission time: 970.238600 ms, File size: 14549760 bytes
+Transmission time: 965.929300 ms, File size: 14549760 bytes
+```
+Average Time: 969.44381 ms
+#### Memory-mapped I/O
+##### Master
+`$cat output/zero_mmap_master_result.txt`
+```
+Transmission time: 1939.596700 ms, File size: 14549760 bytes
+Transmission time: 1059.252700 ms, File size: 14549760 bytes
+Transmission time: 1043.389000 ms, File size: 14549760 bytes
+Transmission time: 1048.843200 ms, File size: 14549760 bytes
+Transmission time: 1041.104900 ms, File size: 14549760 bytes
+Transmission time: 1076.614900 ms, File size: 14549760 bytes
+Transmission time: 1014.962200 ms, File size: 14549760 bytes
+Transmission time: 1044.944900 ms, File size: 14549760 bytes
+Transmission time: 1044.045600 ms, File size: 14549760 bytes
+Transmission time: 1028.866900 ms, File size: 14549760 bytes
+```
+Average Time: 1134.1621 ms
+`$cat output/random_mmap_master_result.txt`
+```
+Transmission time: 8944.142500 ms, File size: 14549760 bytes
+Transmission time: 1991.522000 ms, File size: 14549760 bytes
+Transmission time: 1064.617100 ms, File size: 14549760 bytes
+Transmission time: 1998.334800 ms, File size: 14549760 bytes
+Transmission time: 1043.246200 ms, File size: 14549760 bytes
+Transmission time: 1955.157000 ms, File size: 14549760 bytes
+Transmission time: 1045.301100 ms, File size: 14549760 bytes
+Transmission time: 1950.522900 ms, File size: 14549760 bytes
+Transmission time: 1052.616800 ms, File size: 14549760 bytes
+Transmission time: 1054.362700 ms, File size: 14549760 bytes
+```
+Note:忽略第一個output(手動控制所造成的延遲)
+Average Time: 1461.742288889 ms
+##### Slave
+`$cat output/zero_mmap_slave_result.txt`
+```
+Transmission time: 920.174600 ms, File size: 14549760 bytes
+Transmission time: 919.943400 ms, File size: 14549760 bytes
+Transmission time: 20.325300 ms, File size: 14549760 bytes
+Transmission time: 20.366700 ms, File size: 14549760 bytes
+Transmission time: 19.711800 ms, File size: 14549760 bytes
+Transmission time: 59.114600 ms, File size: 14549760 bytes
+Transmission time: 19.609100 ms, File size: 14549760 bytes
+Transmission time: 19.834100 ms, File size: 14549760 bytes
+Transmission time: 28.700200 ms, File size: 14549760 bytes
+Transmission time: 20.873400 ms, File size: 14549760 bytes
+```
+Average Time: 204.86532 ms
+`$cat output/random_mmap_slave_result.txt`
+```
+Transmission time: 935.257900 ms, File size: 14549760 bytes
+Transmission time: 938.134300 ms, File size: 14549760 bytes
+Transmission time: 38.290600 ms, File size: 14549760 bytes
+Transmission time: 938.044400 ms, File size: 14549760 bytes
+Transmission time: 20.668500 ms, File size: 14549760 bytes
+Transmission time: 937.098300 ms, File size: 14549760 bytes
+Transmission time: 20.424500 ms, File size: 14549760 bytes
+Transmission time: 938.356700 ms, File size: 14549760 bytes
+Transmission time: 41.646600 ms, File size: 14549760 bytes
+Transmission time: 36.699400 ms, File size: 14549760 bytes
+```
+Average Time: 484.46212 ms
+##### 比較
+我們可以發現，當檔案大小較小時，memory-mapped I/O雖比file快速，但是差別並不明顯。即使一次傳送5/10檔案的差距仍然不顯著。但從自行設計的input中可以發現，當檔案較大時(100MB左右)，memory-mapped的效率就比file好，很可能是因為file需要多次呼叫system call並回傳user space，造成時間上的浪費。加上mmap為對Virtual Memory進行操作，效率更佳。另外，從我們產生的兩組數據可以發現，傳送全為0的image比起random產生的image更快速，可能和CPU處理檔案時造成的差距。
 ## 組內分工表
+* Code Design: 鄭昊昕 (b07902125@ntu.edu.tw)
+* Test Data Generation: 何政勳 (b07902129@ntu.edu.tw)
+* Report: 鄭昊昕 (b07902125@ntu.edu.tw),何政勳 (b07902129@ntu.edu.tw)
 ## Reference:
 1. http://www.jollen.org/blog/2007/01/linux_virtual_memory_areas_vma.html
 2. https://blog.csdn.net/eZiMu/article/details/54910019
