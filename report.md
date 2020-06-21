@@ -76,7 +76,7 @@ Transmission time: 0.058700 ms, File size: 577 bytes
 Transmission time: 8.604500 ms, File size: 1502860 bytes
 ```
 * Sending 5 file per execution
-Output of `./5_slave.sh fcntl`
+* Output of `./5_slave.sh fcntl`
 ```
 Transmission time: 0.306000 ms, File size: 2275 bytes
 Transmission time: 0.369900 ms, File size: 2275 bytes
@@ -91,7 +91,7 @@ Transmission time: 0.352500 ms, File size: 2275 bytes
 ```
 Average time: 0.320008 ms
 * Sending 10 file per execution
-Output of `./10_slave.sh fcntl`
+* Output of `./10_slave.sh fcntl`
 ```
 Transmission time: 0.505900 ms, File size: 3018 bytes
 Transmission time: 0.528700 ms, File size: 3018 bytes
@@ -121,7 +121,7 @@ Transmission time: 0.169500 ms, File size: 577 bytes
 Transmission time: 2.693700 ms, File size: 1502860 bytes
 ```
 * Sending 5 file per execution
-Output of `./5_slave.sh mmap`
+* Output of `./5_slave.sh mmap`
 ```
 Transmission time: 0.289900 ms, File size: 2275 bytes
 Transmission time: 0.244300 ms, File size: 2275 bytes
@@ -139,7 +139,7 @@ Transmission time: 0.248100 ms, File size: 2275 bytes
 ```
 Average time:0.298169231 ms
 * Sending 10 file per execution
-Output of `./10_slave.sh mmap`
+* Output of `./10_slave.sh mmap`
 ```
 Transmission time: 0.358500 ms, File size: 3018 bytes
 Transmission time: 0.307200 ms, File size: 3018 bytes
@@ -168,7 +168,9 @@ Note:for *.img files,use `git lfs` instead.(More info :https://git-lfs.github.co
 Use `./zero_(slave/master).sh $method and ./random_(slave/master).sh $method` to test.
 #### File I/O
 ##### Master
-`$cat output/zero_fcntl_master_result.txt`
+```
+$cat output/zero_fcntl_master_result.txt
+```
 ```
 Transmission time: 6993.987400 ms, File size: 14549760 bytes
 Transmission time: 1073.988100 ms, File size: 14549760 bytes
@@ -200,7 +202,9 @@ Transmission time: 2960.611000 ms, File size: 14549760 bytes
 ```
 Average Time: 2095.52102 ms
 ##### Slave
-`$cat output/zero_fcntl_slave_result.txt`
+```
+$cat output/zero_fcntl_slave_result.txt
+```
 ```
 Transmission time: 66.640300 ms, File size: 14549760 bytes
 Transmission time: 72.154200 ms, File size: 14549760 bytes
@@ -232,7 +236,9 @@ Transmission time: 965.929300 ms, File size: 14549760 bytes
 Average Time: 969.44381 ms
 #### Memory-mapped I/O
 ##### Master
-`$cat output/zero_mmap_master_result.txt`
+```
+$cat output/zero_mmap_master_result.txt
+```
 ```
 Transmission time: 1939.596700 ms, File size: 14549760 bytes
 Transmission time: 1059.252700 ms, File size: 14549760 bytes
@@ -264,7 +270,9 @@ Transmission time: 1054.362700 ms, File size: 14549760 bytes
 Note:忽略第一個output(手動控制所造成的延遲)
 Average Time: 1461.742288889 ms
 ##### Slave
-`$cat output/zero_mmap_slave_result.txt`
+```
+$cat output/zero_mmap_slave_result.txt
+```
 ```
 Transmission time: 920.174600 ms, File size: 14549760 bytes
 Transmission time: 919.943400 ms, File size: 14549760 bytes
