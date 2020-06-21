@@ -94,7 +94,7 @@ int main (int argc, char* argv[])
 			perror("ioclt client exits error\n");
 			return 1;
 		}
-		printf("File %d, size= %d bytes\n",j,data_size);
+		printf("File %d, size= %d bytes\n",j,data_size/8);
 		close(file_fd);
 	}
 	close(dev_fd);
