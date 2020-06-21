@@ -3,6 +3,15 @@
 ### Master Device(master_device.c)
 ### Slave Device(slave_device.c)
 ### Master User Program(master.c)
+Input Parameter: ./master num_of_files method file(s)
+`Example: ./master 1 mmap test.txt`
+Step by Step:
+1. 使用一個迴圈來依序傳送輸入的檔案
+1.1. 使用Sample Code 的fcntl傳送:直接使用原本的sample code
+1.2. 使用mmap傳送:一次最多傳送P2_MAP_SIZE大小的檔案內容至master_device，並重複此步驟至該檔案傳送完畢
+2. 迴圈結束後印出其執行時間及檔案大小
+
+
 ### Slave User Program(slave.c)
 ## Difference between file-I/O and memory-mapped I/O
 ### Sample_Input
