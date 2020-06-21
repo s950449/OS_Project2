@@ -183,7 +183,9 @@ Transmission time: 1981.934100 ms, File size: 14549760 bytes
 ```
 Note:忽略第一個output(手動控制所造成的延遲)
 Average Time: 1788.156288889 ms
-`$cat output/random_fcntl_master_result.txt`
+```
+$cat output/random_fcntl_master_result.txt
+```
 ```
 Transmission time: 1957.694600 ms, File size: 14549760 bytes
 Transmission time: 2010.371100 ms, File size: 14549760 bytes
@@ -212,7 +214,9 @@ Transmission time: 974.920800 ms, File size: 14549760 bytes
 Transmission time: 967.156000 ms, File size: 14549760 bytes
 ```
 Average Time: 519.51015 ms
-`$cat output/random_fcntl_slave_result.txt`
+```
+$cat output/random_fcntl_slave_result.txt
+```
 ```
 Transmission time: 970.686900 ms, File size: 14549760 bytes
 Transmission time: 972.074100 ms, File size: 14549760 bytes
@@ -242,7 +246,9 @@ Transmission time: 1044.045600 ms, File size: 14549760 bytes
 Transmission time: 1028.866900 ms, File size: 14549760 bytes
 ```
 Average Time: 1134.1621 ms
-`$cat output/random_mmap_master_result.txt`
+```
+$cat output/random_mmap_master_result.txt
+```
 ```
 Transmission time: 8944.142500 ms, File size: 14549760 bytes
 Transmission time: 1991.522000 ms, File size: 14549760 bytes
@@ -272,7 +278,9 @@ Transmission time: 28.700200 ms, File size: 14549760 bytes
 Transmission time: 20.873400 ms, File size: 14549760 bytes
 ```
 Average Time: 204.86532 ms
-`$cat output/random_mmap_slave_result.txt`
+```
+$cat output/random_mmap_slave_result.txt
+```
 ```
 Transmission time: 935.257900 ms, File size: 14549760 bytes
 Transmission time: 938.134300 ms, File size: 14549760 bytes
