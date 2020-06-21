@@ -1,4 +1,11 @@
 # OS Project 2
+## Design
+### Master Device(master_device.c)
+### Slave Device(slave_device.c)
+### Master User Program(master.c)
+### Slave User Program(slave.c)
+## Difference between file-I/O and memory-mapped I/O
+## 組內分工表
 ## Reference:
 1. http://www.jollen.org/blog/2007/01/linux_virtual_memory_areas_vma.html
 2. https://blog.csdn.net/eZiMu/article/details/54910019
