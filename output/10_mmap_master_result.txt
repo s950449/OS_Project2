@@ -1,0 +1,10 @@
+Transmission time: 3023.566100 ms, File size: 3018 bytes
+Transmission time: 1015.523200 ms, File size: 3018 bytes
+Transmission time: 1017.334800 ms, File size: 3018 bytes
+Transmission time: 1017.202900 ms, File size: 3018 bytes
+Transmission time: 1005.944900 ms, File size: 3018 bytes
+Transmission time: 1941.688200 ms, File size: 3018 bytes
+Transmission time: 1012.270300 ms, File size: 3018 bytes
+Transmission time: 1011.305000 ms, File size: 3018 bytes
+Transmission time: 1009.633600 ms, File size: 3018 bytes
+Transmission time: 1009.663100 ms, File size: 3018 bytes
