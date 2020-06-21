@@ -7,7 +7,8 @@ This is the source code of operating system project2.
 ./slave_device  : the device moudule for slave client
 ./ksocket: the device moudule including the funtions used for kernel socket
 ./user_program : the user program "master" and "slave"
-
+./input: the test input files
+./ouput: the sample output files
 
 To use it, please:
 1.change to super user
