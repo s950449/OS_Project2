@@ -24,12 +24,12 @@ static const struct vm_operations_struct project2_vm_ops = {
 };
 static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 ```
-In `project2_open` and `project2_close`, just print debug message or do nothing.
-In `project2_fault`, deal with page fault.
-In `project2_mmap`, use `virt_to_phys` and `remap_pfn_range` to handle memory mapping.
-Design master_ioctl_mmap operations: Use `ksend` to send data to socket.
+* In `project2_open` and `project2_close`, just print debug message or do nothing.
+* In `project2_fault`, deal with page fault.
+* In `project2_mmap`, use `virt_to_phys` and `remap_pfn_range` to handle memory mapping.
+* Design master_ioctl_mmap operations: Use `ksend` to send data to socket.
 ### Slave Device(slave_device.c)
-Design master_device file_operations and mmap_operations:
+* Design master_device file_operations and mmap_operations:
 ```
 void project2_open(struct vm_area_struct *vma){
 }
@@ -45,21 +45,21 @@ static const struct vm_operations_struct project2_vm_ops = {
 static int project2_mmap(struct file *file,struct vm_area_struct *vma){
 }
 ```
-In `project2_open` and `project2_close`, just print debug message or do nothing.
-In `project2_fault`, deal with page fault.
-In `project2_mmap`, use `virt_to_phys` and `remap_pfn_range` to handle memory mapping.
-Design slave_ioctl_mmap operations:
+* In `project2_open` and `project2_close`, just print debug message or do nothing.
+* In `project2_fault`, deal with page fault.
+* In `project2_mmap`, use `virt_to_phys` and `remap_pfn_range` to handle memory mapping.
+* Design slave_ioctl_mmap operations:
 * Use `krecv` with `MSG_WAITALL` flag to get data,`MSG_WAITALL` should block until all data from socket has been received.  Copy data to file. If data_size >= P2_MAP_SIZE: return
 ### Master User Program(master.c)
-Input Parameter: ./master num_of_files method file(s)
+* Input Parameter: ./master num_of_files method file(s)
 `Example: ./master 1 mmap test.txt`
-Step by Step:
+#### Step by Step:
 1. 使用一個迴圈來依序傳送輸入的檔案
 1.1. 使用Sample Code 的fcntl傳送:直接使用原本的sample code
 1.2. 使用mmap接收:一次最多傳送P2_MAP_SIZE大小的檔案內容至master_device，並重複此步驟至該檔案傳送完畢
 2. 迴圈結束後印出其執行時間及檔案大小
 ### Slave User Program(slave.c)
-Input Parameter: ./slave num_of_files method IP file(s)
+* Input Parameter: ./slave num_of_files method IP file(s)
 `Example: ./slave 3 fcntl 127.0.0.1 test.txt test2.txt test3.txt`
 1. 使用一個迴圈來依序接收檔案
 1.1. 使用Sample Code 的fcntl接收:使用原本的sample code
@@ -312,7 +312,7 @@ Transmission time: 41.646600 ms, File size: 14549760 bytes
 Transmission time: 36.699400 ms, File size: 14549760 bytes
 ```
 Average Time: 484.46212 ms
-##### 比較
+#### 比較
 我們可以發現，當檔案大小較小時，memory-mapped I/O雖比file快速，但是差別並不明顯。即使一次傳送5/10檔案的差距仍然不顯著。但從自行設計的input中可以發現，當檔案較大時(100MB左右)，memory-mapped的效率就比file好，很可能是因為file需要多次呼叫system call並回傳user space，造成時間上的浪費。加上mmap為對Virtual Memory進行操作，效率更佳。另外，從我們產生的兩組數據可以發現，傳送全為0的image比起random產生的image更快速，可能和CPU處理檔案時造成的差距。
 ## 組內分工表
 * Code Design: 鄭昊昕 (b07902125@ntu.edu.tw)
