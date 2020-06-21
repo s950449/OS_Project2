@@ -1,0 +1,10 @@
+Transmission time: 935.257900 ms, File size: 14549760 bytes
+Transmission time: 938.134300 ms, File size: 14549760 bytes
+Transmission time: 38.290600 ms, File size: 14549760 bytes
+Transmission time: 938.044400 ms, File size: 14549760 bytes
+Transmission time: 20.668500 ms, File size: 14549760 bytes
+Transmission time: 937.098300 ms, File size: 14549760 bytes
+Transmission time: 20.424500 ms, File size: 14549760 bytes
+Transmission time: 938.356700 ms, File size: 14549760 bytes
+Transmission time: 41.646600 ms, File size: 14549760 bytes
+Transmission time: 36.699400 ms, File size: 14549760 bytes
