@@ -58,10 +58,10 @@ Input Parameter: ./slave num_of_files method IP file(s)
 ## Page Descriptor
 ![](https://i.imgur.com/ZBguksr.png)
 ## Difference between file-I/O and memory-mapped I/O
+為了方便比較，統一使用slave的output(因為master的有手動操作延遲的問題)
 ### Sample_Output
-
 #### File I/O(Slave)
-* Sending 1 file per exeution
+* Sending 1 file per exeution(target_file 1~10 and target_file)
 ```
 Transmission time: 0.165000 ms, File size: 4 bytes
 Transmission time: 0.085700 ms, File size: 107 bytes
@@ -106,7 +106,7 @@ Transmission time: 0.388300 ms, File size: 3018 bytes
 ```
 Average Time: 0.51107 ms
 #### Memory-mapped I/O(Slave)
-* Sending 1 file per exeution
+* Sending 1 file per exeution(target_file 1~10 and target_file)
 ```
 Transmission time: 0.501900 ms, File size: 4 bytes
 Transmission time: 0.078600 ms, File size: 107 bytes
@@ -154,6 +154,17 @@ Transmission time: 0.436200 ms, File size: 3018 bytes
 ```
 Average Time: 0.41468 ms
 ### Self-designed-Input (Large files)
+Use dd to generate two sets of image files:
+1. ` dd bs=1M count=100 if=/dev/zero of=./input/100M.img`
+2. ` dd bs=1 count=100M if=/dev/random of=./input/R100M.img`
+We have 5 different size:1K,5K,1M,10M,100M.
+Use `md5sum` or `sha512sum` to check the integrity of file.
+Example:`sudo sha512sum output/R10M.img input/R10M.img`
+Note:for *.img files,use `git lfs` instead.(More info :https://git-lfs.github.com/)
+```
+89a3d69233efd946c57b7a62cc300d50254cf1d7e5cb380960a328a197f462fec9e4c4ef7284ed74ea61333606ae09ec26c5322a4d1fc05f06cabcae41541d54  output/R10M.img
+89a3d69233efd946c57b7a62cc300d50254cf1d7e5cb380960a328a197f462fec9e4c4ef7284ed74ea61333606ae09ec26c5322a4d1fc05f06cabcae41541d54  input/R10M.img
+```
 ## 組內分工表
 ## Reference:
 1. http://www.jollen.org/blog/2007/01/linux_virtual_memory_areas_vma.html
