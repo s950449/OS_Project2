@@ -1,4 +1,14 @@
 # OS Project 2
+## Test Environment
+```
+$uname -r
+4.15.0-106-generic
+```
+* CPU:i5-3210M @ 2.50GHz
+* OS:Linux Mint 19.3
+* RAM:8GB
+* Storage:180GiB
+* Test on a physical machine
 ## Design
 ### Master Device(master_device.c)
 Design master_device file_operations and mmap_operations:
