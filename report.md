@@ -8,11 +8,15 @@ Input Parameter: ./master num_of_files method file(s)
 Step by Step:
 1. 使用一個迴圈來依序傳送輸入的檔案
 1.1. 使用Sample Code 的fcntl傳送:直接使用原本的sample code
-1.2. 使用mmap傳送:一次最多傳送P2_MAP_SIZE大小的檔案內容至master_device，並重複此步驟至該檔案傳送完畢
+1.2. 使用mmap接收:一次最多傳送P2_MAP_SIZE大小的檔案內容至master_device，並重複此步驟至該檔案傳送完畢
 2. 迴圈結束後印出其執行時間及檔案大小
-
-
 ### Slave User Program(slave.c)
+Input Parameter: ./slave num_of_files method IP file(s)
+`Example: ./slave 3 fcntl 127.0.0.1 test.txt test2.txt test3.txt`
+1. 使用一個迴圈來依序接收檔案
+1.1. 使用Sample Code 的fcntl接收:使用原本的sample code
+1.2. 使用mmap接收:持續從slave_device讀取資料，並重複此步驟至所有資料讀取完畢(ret=0)
+2. 迴圈結束後印出其執行時間及檔案大小
 ## Difference between file-I/O and memory-mapped I/O
 ### Sample_Input
 #### File I/O(Slave)
