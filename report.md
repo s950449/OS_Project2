@@ -9,6 +9,14 @@ $uname -r
 * RAM:8GB
 * Storage:180GiB
 * Test on a physical machine
+## DMESG Output
+```
+#./user_program/master 1 mmap input/sample_input_1/target_file_1
+```
+```
+#./user_program/slave 1 mmap 127.0.0.1 output/target_file_1
+```
+![](https://imgur.com/BGq01gN.png)
 ## Design
 ### Master Device(master_device.c)
 Design master_device file_operations and mmap_operations:
@@ -326,3 +334,26 @@ Average Time: 484.46212 ms
 5. http://www.jollen.org/blog/2007/04/mmap_remap_page_range_nutshell.html
 6. https://github.com/paraka/mmap-kernel-transfer-data/
 7. https://stackoverflow.com/questions/8470403/socket-recv-hang-on-large-message-with-msg-waitall
+8. https://www.kernel.org/doc/gorman/html/understand/understand006.html
+9. https://sysplay.github.io/books/LinuxDrivers/book/Content/Part05.html
+10. http://www.jollen.org/blog/2007/01/linux_virtual_memory_areas_vma.html
+11. https://stackoverflow.com/questions/29695247/what-is-the-relation-between-virt-to-phys-and-the-cpus-mmu-in-the-linux-kernel
+12. https://www.kernel.org/doc/html/v4.15/kernel-hacking/hacking.html?highlight=file_operation
+13. https://blog.csdn.net/eZiMu/article/details/54910019
+14. https://stackoverflow.com/questions/5748492/is-there-any-api-for-determining-the-physical-address-from-virtual-address-in-li
+15. http://www.jollen.org/blog/2007/04/mmap_remap_page_range_nutshell.html
+16. https://github.com/paraka/mmap-kernel-transfer-data/blob/master/mmap-example.c
+17. https://labs.f-secure.com/assets/BlogFiles/mwri-mmap-exploitation-whitepaper-2017-09-18.pdf
+18. https://elixir.bootlin.com/linux/latest/source/include/linux/mm.h
+19. https://hant-kb.kutu66.com/c/post_2768082
+20. https://man7.org/linux/man-pages/man2/mmap.2.html
+21. https://stackoverflow.com/questions/14063046/fallocate-vs-posix-fallocate
+22. https://www.man7.org/linux/man-pages/man2/fallocate.2.html
+23. https://stackoverflow.com/questions/12210451/how-to-prevent-memcpy-buffer-overflow
+24. https://unix.stackexchange.com/questions/128213/how-is-page-size-determined-in-virtual-address-space
+25. https://cboard.cprogramming.com/c-programming/143410-segment-fault-shared-memory-set-using-mmap.html
+26. https://stackoverflow.com/questions/4779188/how-to-use-mmap-to-allocate-a-memory-in-heap
+27. https://lwn.net/Articles/129480/
+28. https://github.com/MarkTseng/mySampleCode/blob/master/linux_device_driver_template/linux_module_example/mmapdriver.c
+29. https://hackmd.io/@DIuvbu1vRU2C5FwWIMzZ_w/H1cuTQrCH
+
