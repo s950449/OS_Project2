@@ -322,6 +322,7 @@ Transmission time: 36.699400 ms, File size: 14549760 bytes
 Average Time: 484.46212 ms
 #### 比較
 我們可以發現，當檔案大小較小時，memory-mapped I/O雖比file快速，但是差別並不明顯。即使一次傳送5/10檔案的差距仍然不顯著。但從自行設計的input中可以發現，當檔案較大時(100MB左右)，memory-mapped的效率就比file好，很可能是因為file需要多次呼叫system call並回傳user space，造成時間上的浪費。加上mmap為對Virtual Memory進行操作，效率更佳。另外，從我們產生的兩組數據可以發現，傳送全為0的image比起random產生的image更快速，可能和CPU處理檔案時造成的差距。
+我們也測試過在調整不同P2_MAP_SIZE時的結果，對於小檔案來說差距並不是很明顯。
 ## 組內分工表
 * Code Design: 鄭昊昕 (b07902125@ntu.edu.tw)
 * Test Data Generation: 何政勳 (b07902129@ntu.edu.tw)
